@@ -11,6 +11,7 @@
 		C2283CE9273B07D00041D869 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2283CE8273B07D00041D869 /* ContentView.swift */; };
 		C2283CEB273B07D30041D869 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2283CEA273B07D30041D869 /* Assets.xcassets */; };
 		C2283CEE273B07D30041D869 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2283CED273B07D30041D869 /* Preview Assets.xcassets */; };
+		C2CDED28274D846F0016518A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2CDED27274D846F0016518A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		C2283CE8273B07D00041D869 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C2283CEA273B07D30041D869 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2283CED273B07D30041D869 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C2CDED27274D846F0016518A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		C2283CE5273B07D00041D869 /* P2 */ = {
 			isa = PBXGroup;
 			children = (
+				C2CDED27274D846F0016518A /* GoogleService-Info.plist */,
 				C2283CE6273B07D00041D869 /* P2App.swift */,
 				C2283CE8273B07D00041D869 /* ContentView.swift */,
 				C2283CEA273B07D30041D869 /* Assets.xcassets */,
@@ -127,6 +130,7 @@
 			files = (
 				C2283CEE273B07D30041D869 /* Preview Assets.xcassets in Resources */,
 				C2283CEB273B07D30041D869 /* Assets.xcassets in Resources */,
+				C2CDED28274D846F0016518A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +281,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +311,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>265932620073-upf3a5p1pjac0f5o6a1olu4ig7omg5ca.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.265932620073-upf3a5p1pjac0f5o6a1olu4ig7omg5ca</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAN0MHtQGJZXU_wViMfZJCXjMm9TQ826Bs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>265932620073</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.noahwilder.P2</string>
+	<key>PROJECT_ID</key>
+	<string>p2arduino</string>
+	<key>STORAGE_BUCKET</key>
+	<string>p2arduino.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:265932620073:ios:15baf3a4ed5504f3007738</string>
+</dict>
+</plist>
