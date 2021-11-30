@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
-
+import Firebase
 
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     
-    @State var concentration: Int = 1300
+    @State var concentration: Int = 0
+    @State var soundLevel: Int = 0
+    @State var temperature: Int = 0
+
     
     
     var cardBackgroundColor: Color {
@@ -24,14 +27,59 @@ struct ContentView: View {
             VStack {
                 SensorCardView(
                     title: "CO₂ Levels",
-                    symbol: AirQuality.medium.symbolName,
+                    symbol: AirQuality.low.symbolName,
                     value: $concentration,
-                    minValue: 1100,
-                    maxValue: 1500,
+                    minValue: 0,
+                    maxValue: 2000,
                     unit: "PPM"
                 )
+                
+                SensorCardView(
+                    title: "Temperature",
+                    symbol: AirQuality.low.symbolName,
+                    value: $temperature,
+                    minValue: 0,
+                    maxValue: 100,
+                    unit: "°C"
+                )
+                
+                SensorCardView(
+                    title: "Sound Level",
+                    symbol: AirQuality.low.symbolName,
+                    value: $soundLevel,
+                    minValue: 0,
+                    maxValue: 200,
+                    unit: "dB"
+                )
+            }
+            .onAppear {
+                setUpObserver(for: "co2", valueType: Int.self) { newConcentration in
+                    withAnimation {
+                        concentration = newConcentration
+                    }
+                }
+                setUpObserver(for: "temperature", valueType: Int.self) { newTemperature in
+                    withAnimation {
+                        temperature = newTemperature
+                    }
+                }
+                setUpObserver(for: "sound", valueType: Int.self) { newSoundLevel in
+                    withAnimation {
+                        soundLevel = newSoundLevel
+                    }
+                }
             }
             
+        }
+    }
+    
+    func setUpObserver<T>(for childKey: String, valueType: T.Type, onValueChanged: @escaping (T) -> Void)  {
+        Database.database().reference().child(childKey).observe(.value) { snapshot in
+            guard let newValue = snapshot.value as? T else {
+                print("Could not parse value.")
+                return
+            }
+            onValueChanged(newValue)
         }
     }
 }
