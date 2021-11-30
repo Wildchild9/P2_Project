@@ -15,8 +15,6 @@ struct ContentView: View {
     @State var concentration: Int = 0
     @State var soundLevel: Int = 0
     @State var temperature: Int = 0
-
-    
     
     var cardBackgroundColor: Color {
         return colorScheme == .light ? .white : Color(UIColor.secondarySystemFill)
@@ -24,7 +22,8 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 25) {
+                
                 SensorCardView(
                     title: "CO₂ Levels",
                     symbol: AirQuality.low.symbolName,
@@ -33,10 +32,11 @@ struct ContentView: View {
                     maxValue: 2000,
                     unit: "PPM"
                 )
+                .padding(.top, 10)
                 
                 SensorCardView(
                     title: "Temperature",
-                    symbol: AirQuality.low.symbolName,
+                    symbol: "thermometer",
                     value: $temperature,
                     minValue: 0,
                     maxValue: 100,
@@ -44,13 +44,15 @@ struct ContentView: View {
                 )
                 
                 SensorCardView(
-                    title: "Sound Level",
-                    symbol: AirQuality.low.symbolName,
+                    title: "Sound Levels",
+                    symbol: "ear",
                     value: $soundLevel,
                     minValue: 0,
                     maxValue: 200,
                     unit: "dB"
                 )
+                Spacer()
+                
             }
             .onAppear {
                 setUpObserver(for: "co2", valueType: Int.self) { newConcentration in
@@ -69,6 +71,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationTitle("Productivity Metrics")
             
         }
     }
@@ -142,7 +145,7 @@ struct SensorCardView: View {
             ProgressBar(
                 height: 5,
                 gradientColors: [.blue, .red],
-                circleColor: .black,
+                circleColor: .primary,
                 backgroundColor: Color(UIColor.secondarySystemBackground),
                 percent: percent
             )
@@ -151,8 +154,6 @@ struct SensorCardView: View {
                 .font(.system(.largeTitle, design: .rounded).bold())
         }
         .padding()
-        .background(Material.ultraThick)
-        .cornerRadius(20)
     }
     
     
