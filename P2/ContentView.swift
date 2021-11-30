@@ -7,14 +7,15 @@
 
 import SwiftUI
 import Firebase
+import UserNotifications
 
 struct ContentView: View {
+    
+    @AppStorage("co2") var concentration: Int = 0
+    @AppStorage("temperature") var temperature: Int = 0
+    @AppStorage("sound") var soundLevel: Int = 0
+    
     @Environment(\.colorScheme) var colorScheme
-    
-    
-    @State var concentration: Int = 0
-    @State var soundLevel: Int = 0
-    @State var temperature: Int = 0
     
     var cardBackgroundColor: Color {
         return colorScheme == .light ? .white : Color(UIColor.secondarySystemFill)
@@ -51,25 +52,13 @@ struct ContentView: View {
                     maxValue: 200,
                     unit: "dB"
                 )
+                
                 Spacer()
                 
             }
             .onAppear {
-                setUpObserver(for: "co2", valueType: Int.self) { newConcentration in
-                    withAnimation {
-                        concentration = newConcentration
-                    }
-                }
-                setUpObserver(for: "temperature", valueType: Int.self) { newTemperature in
-                    withAnimation {
-                        temperature = newTemperature
-                    }
-                }
-                setUpObserver(for: "sound", valueType: Int.self) { newSoundLevel in
-                    withAnimation {
-                        soundLevel = newSoundLevel
-                    }
-                }
+                
+                setUpObservers()
             }
             .navigationTitle("Productivity Metrics")
             
@@ -84,6 +73,45 @@ struct ContentView: View {
             }
             onValueChanged(newValue)
         }
+    }
+    
+    func setUpObservers() {
+        setUpObserver(for: "co2", valueType: Int.self) { newConcentration in
+            guard newConcentration != concentration else { return }
+            dispatchNotification(title: "CO₂ levels updated", message: "The new CO₂ level is \(newConcentration) PPM")
+            withAnimation {
+                concentration = newConcentration
+            }
+        }
+        setUpObserver(for: "temperature", valueType: Int.self) { newTemperature in
+            guard newTemperature != temperature else { return }
+            withAnimation {
+                temperature = newTemperature
+            }
+        }
+        setUpObserver(for: "sound", valueType: Int.self) { newSoundLevel in
+            guard newSoundLevel != soundLevel else { return }
+//            UserDefaults.standard.set(newSoundLevel, forKey: "sound")
+            withAnimation {
+                soundLevel = newSoundLevel
+            }
+        }
+    }
+    
+    func dispatchNotification(title: String, message: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = message
+        content.sound = UNNotificationSound.default
+        
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+        
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
     }
 }
 
