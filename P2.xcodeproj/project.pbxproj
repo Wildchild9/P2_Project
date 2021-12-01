@@ -18,6 +18,7 @@
 		C2F3908D2757FDEE003F2DD3 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F3908C2757FDEE003F2DD3 /* ProgressBar.swift */; };
 		C2F3908F2757FE13003F2DD3 /* SensorCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F3908E2757FE13003F2DD3 /* SensorCardView.swift */; };
 		C2F390912757FE6F003F2DD3 /* CO2Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F390902757FE6F003F2DD3 /* CO2Level.swift */; };
+		C2F3909327581407003F2DD3 /* TemperatureLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F3909227581407003F2DD3 /* TemperatureLevel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		C2F3908C2757FDEE003F2DD3 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		C2F3908E2757FE13003F2DD3 /* SensorCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorCardView.swift; sourceTree = "<group>"; };
 		C2F390902757FE6F003F2DD3 /* CO2Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CO2Level.swift; sourceTree = "<group>"; };
+		C2F3909227581407003F2DD3 /* TemperatureLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureLevel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				C2F3908C2757FDEE003F2DD3 /* ProgressBar.swift */,
 				C2283CE8273B07D00041D869 /* ContentView.swift */,
 				C2F390902757FE6F003F2DD3 /* CO2Level.swift */,
+				C2F3909227581407003F2DD3 /* TemperatureLevel.swift */,
 				C2F3908E2757FE13003F2DD3 /* SensorCardView.swift */,
 				C2CDED27274D846F0016518A /* GoogleService-Info.plist */,
 				C2283CEA273B07D30041D869 /* Assets.xcassets */,
@@ -169,6 +172,7 @@
 				C273FA322756BCC9002E90C1 /* AppDelegate.swift in Sources */,
 				C2283CE9273B07D00041D869 /* ContentView.swift in Sources */,
 				C2F3908F2757FE13003F2DD3 /* SensorCardView.swift in Sources */,
+				C2F3909327581407003F2DD3 /* TemperatureLevel.swift in Sources */,
 				C2F3908D2757FDEE003F2DD3 /* ProgressBar.swift in Sources */,
 				C2F390912757FE6F003F2DD3 /* CO2Level.swift in Sources */,
 				C2283CE7273B07D00041D869 /* P2App.swift in Sources */,

@@ -11,16 +11,22 @@ import UserNotifications
 
 struct ContentView: View {
     
-    @AppStorage("temperature") var temperature: Int = 0
-    @AppStorage("sound") var soundLevel: Int = 0
-    
-    @Environment(\.colorScheme) var colorScheme
-    
     @State var co2Level: CO2Level {
         willSet {
             UserDefaults.standard.set(newValue.concentration, forKey: "co2")
         }
     }
+    @State var temperatureLevel: TemperatureLevel {
+        willSet {
+            UserDefaults.standard.set(newValue.temperature, forKey: "temperature")
+        }
+    }
+    @AppStorage("sound") var soundLevel: Int = 0
+
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    
     
     var cardBackgroundColor: Color {
         return colorScheme == .light ? .white : Color(UIColor.secondarySystemFill)
@@ -28,47 +34,53 @@ struct ContentView: View {
     
     init() {
         _co2Level = State(wrappedValue: CO2Level(concentration: UserDefaults.standard.integer(forKey: "co2")))
+        _temperatureLevel = State(wrappedValue: TemperatureLevel(temperature: UserDefaults.standard.integer(forKey: "temperature")))
     }
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 25) {
-                
-                VStack {
+            ScrollView(.vertical) {
+                VStack(spacing: 25) {
+                    
+                    VStack {
+                        SensorCardView(
+                            title: "CO₂ Levels",
+                            level: co2Level.hazardLevel.name,
+                            caption: co2Level.caption,
+                            symbol: co2Level.symbolName,
+                            value: $co2Level.concentration,
+                            minValue: 0,
+                            maxValue: 5000,
+                            unit: "PPM"
+                        )
+                        
+                    }
+                    Divider()
                     SensorCardView(
-                        title: "CO₂ Levels",
-                        symbol: co2Level.symbolName,
-                        value: $co2Level.concentration,
+                        title: "Temperature",
+                        level: temperatureLevel.hazardLevel.name,
+                        caption: temperatureLevel.caption,
+                        symbol: temperatureLevel.symbolName,
+                        value: $temperatureLevel.temperature,
                         minValue: 0,
-                        maxValue: 5000,
-                        unit: "PPM"
+                        maxValue: 50,
+                        unit: "°C"
                     )
-                    Text("\(co2Level.hazardLevel.caption)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    
+                    Divider()
+                    
+                    SensorCardView(
+                        title: "Sound Levels",
+                        symbol: "ear",
+                        value: $soundLevel,
+                        minValue: 0,
+                        maxValue: 200,
+                        unit: "dB"
+                    )
+                    
+                    Spacer()
                 }
-                .padding(.top, 10)
-                
-                SensorCardView(
-                    title: "Temperature",
-                    symbol: "thermometer",
-                    value: $temperature,
-                    minValue: 0,
-                    maxValue: 100,
-                    unit: "°C"
-                )
-                
-                SensorCardView(
-                    title: "Sound Levels",
-                    symbol: "ear",
-                    value: $soundLevel,
-                    minValue: 0,
-                    maxValue: 200,
-                    unit: "dB"
-                )
-                
-                Spacer()
-                
+                .padding()
             }
             .onAppear {
                 setUpObservers()
@@ -93,18 +105,24 @@ struct ContentView: View {
             guard newConcentration != co2Level.concentration else { return }
             let newCO2Level = CO2Level(concentration: newConcentration)
             
-            if co2Level.hazardLevel != newCO2Level.hazardLevel && newCO2Level.hazardLevel.requiresNotification {
-                let (title, message) = newCO2Level.hazardLevel.notificationContent
-                dispatchNotification(title: title, message: message)
+            if co2Level.hazardLevel != newCO2Level.hazardLevel && newCO2Level.requiresNotification {
+                let (title, _) = newCO2Level.notificationContent
+                dispatchNotification(title: title, message: "See app for more details.")
             }
             withAnimation {
                 co2Level = newCO2Level
             }
         }
         setUpObserver(for: "temperature", valueType: Int.self) { newTemperature in
-            guard newTemperature != temperature else { return }
+            guard newTemperature != temperatureLevel.temperature else { return }
+            let newTemperatureLevel = TemperatureLevel(temperature: newTemperature)
+            
+            if temperatureLevel.hazardLevel != newTemperatureLevel.hazardLevel && newTemperatureLevel.requiresNotification {
+                let (title, _) = newTemperatureLevel.notificationContent
+                dispatchNotification(title: title, message: "See app for more details.")
+            }
             withAnimation {
-                temperature = newTemperature
+                temperatureLevel = newTemperatureLevel
             }
         }
         setUpObserver(for: "sound", valueType: Int.self) { newSoundLevel in

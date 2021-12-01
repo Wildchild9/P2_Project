@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SensorCardView: View {
     var title: String
+    var level: String?
+    var caption: String?
     var symbol: String
     @Binding
     var value: Int
@@ -35,17 +37,33 @@ struct SensorCardView: View {
         
     }
     
+    var formattedLevel: String {
+        return level == nil ? "" : " (\(level!))"
+    }
+    
+    
     var body: some View {
-        VStack() {
+        VStack(alignment: .leading, spacing: 12.5) {
             HStack(alignment: .firstTextBaseline) {
                 Image(systemName: symbol)
                 
                 Text(title.uppercased())
-                
+                                    
                 Spacer()
             }
-            .padding(.bottom, 10)
+            .font(.body.weight(.medium))
+            .foregroundColor(.secondary)
             
+            VStack(alignment: .leading, spacing: 5) {
+                Text(formattedValue)
+                    .font(.system(.title, design: .rounded).bold())
+                if let level = level {
+                    Text(level)
+                        .font(.headline)
+                }
+            }
+            
+
             HStack {
                 Text(formattedMinValue)
                     .font(.caption)
@@ -70,10 +88,13 @@ struct SensorCardView: View {
                 percent: percent
             )
             
-            Text(formattedValue)
-                .font(.system(.largeTitle, design: .rounded).bold())
+            if let caption = caption {
+                Text(caption)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            
         }
-        .padding()
     }
     
     
